@@ -1,5 +1,6 @@
 package org.example.kino_marts.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -14,6 +15,7 @@ public class MovieShow {
     @OneToOne
     @JoinColumn(name = "movie_id", nullable = false) // Fremmednøgle fra Movie
     private Movie movie_id;
+
 
     private Date start_time;
     private Date end_time;
