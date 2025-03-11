@@ -1,40 +1,40 @@
-package model;
+package org.example.kino_marts.model;
 
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-public class Order {
+public class MovieOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int order_id; // Primærnøgle
+    private int movie_order_id; // Primærnøgle
 
-    private double order_total_price;
+    private double movie_order_total_price;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false) // Fremmednøgle fra Customer
     private Customer customer;
 
     // Én order kan have mange order_items (se ER diagram)
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "movieOrder", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
-    public int getOrder_id() {
-        return order_id;
+    public int getMovie_order_id() {
+        return movie_order_id;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public void setMovie_order_id(int order_id) {
+        this.movie_order_id = order_id;
     }
 
-    public double getOrder_total_price() {
-        return order_total_price;
+    public double getMovie_order_total_price() {
+        return movie_order_total_price;
     }
 
-    public void setOrder_total_price(double order_total_price) {
-        this.order_total_price = order_total_price;
+    public void setMovie_order_total_price(double order_total_price) {
+        this.movie_order_total_price = order_total_price;
     }
 
     public Customer getCustomer() {

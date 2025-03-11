@@ -1,11 +1,13 @@
-package model;
+package org.example.kino_marts.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-public class Employee {
 
+@Entity
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employee_id;

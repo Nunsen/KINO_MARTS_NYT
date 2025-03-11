@@ -10,16 +10,14 @@ public class MovieShow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movie_show_id;
+
     @OneToOne
     @JoinColumn(name = "movie_id", nullable = false) // Fremmednøgle fra Movie
     private Movie movie_id;
+
     private Date start_time;
     private Date end_time;
     private Date date_of_movie;
-
-    @OneToOne
-    @JoinColumn(name = "booking_id", nullable = false) // Fremmednøgle fra Booking
-    private Booking booking;
 
     public int getMovie_show_id() {
         return movie_show_id;
@@ -58,7 +56,7 @@ public class MovieShow {
     }
 
     public void setDate_of_movie(Date date_of_movie) {
-        this.date_of_movie = date_of_movie;
+        this.date_of_movie = date_of_movie;}
     }
 
     public int getBooking_id() {

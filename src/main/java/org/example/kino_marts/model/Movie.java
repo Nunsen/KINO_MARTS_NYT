@@ -1,4 +1,4 @@
-package model;
+package org.example.kino_marts.model;
 
 import jakarta.persistence.*;
 
@@ -15,11 +15,11 @@ public class Movie {
 
     private int release_year;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "actor_id", nullable = false) // Fremmednøgle fra Actor
     private Actor actor;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "instructor_id", nullable = false) // Fremmednøgle fra Instructor
     private Instructor instructor;
     private String movie_photo;

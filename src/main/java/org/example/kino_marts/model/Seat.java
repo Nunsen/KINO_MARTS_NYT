@@ -1,4 +1,4 @@
-package model;
+package org.example.kino_marts.model;
 
 import jakarta.persistence.*;
 
@@ -53,12 +53,10 @@ public class Seat {
         this.occupied = occupied;
     }
 
-    public int getBooking_id() {
-        return booking_id;
-    }
+    public Booking getBooking_id() { return booking; }
 
-    public void setBooking_id(int booking_id) {
-        this.booking_id = booking_id;
+    public void setBooking_id(Booking booking) {
+        this.booking = booking;
     }
 
     public int getPrice_of_seat() {

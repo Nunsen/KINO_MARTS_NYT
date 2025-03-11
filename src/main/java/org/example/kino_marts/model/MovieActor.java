@@ -1,4 +1,4 @@
-package model;
+package org.example.kino_marts.model;
 
 import jakarta.persistence.*;
 

@@ -1,7 +1,6 @@
-package model;
+package org.example.kino_marts.model;
 
 import jakarta.persistence.*;
-
 import java.sql.Date;
 
 @Entity
@@ -15,11 +14,15 @@ public class Booking {
     private Customer customer;
 
     private Date date_of_movie;
-
-    @OneToOne
-    @JoinColumn(name = "movie_show_id", nullable = false) // Fremmednøgle fra movie_show
-    private MovieShow movieShow;
     private String status_payment;
+
+    // En booking SKAL have en MovieShow, men movieshow behøves ikke booking!
+    @OneToOne
+    @JoinColumn(name = "movie_show_id", nullable = false) // Fremmednøgle fra MovieShow
+    private MovieShow movieShow;
+
+
+
 
     public int getBooking_id() {
         return booking_id;

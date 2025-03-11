@@ -1,4 +1,4 @@
-package model;
+package org.example.kino_marts.model;
 
 import jakarta.persistence.*;
 
@@ -10,8 +10,8 @@ public class OrderItem {
     private int order_item_id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false) // Fremmednøgle fra order
-    private Order order;
+    @JoinColumn(name = "movie_order_id", nullable = false) // Fremmednøgle fra order
+    private MovieOrder movieOrder;
 
     private String order_item_name;
     private int order_item_price;
@@ -24,19 +24,19 @@ public class OrderItem {
         this.order_item_id = order_item_id;
     }
 
-    public Order getOrder() {
-        return order;
+    public MovieOrder getOrder() {
+        return movieOrder;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder(MovieOrder order) {
+        this.movieOrder = order;
     }
 
-    public String getOrder_item_name() {
+    public String getMovieOrder_item_name() {
         return order_item_name;
     }
 
-    public void setOrder_item_name(String order_item_name) {
+    public void setMovieOrder_item_name(String order_item_name) {
         this.order_item_name = order_item_name;
     }
 
