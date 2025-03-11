@@ -1,4 +1,4 @@
-package model;
+package org.example.kino_marts.model;
 
 import jakarta.persistence.*;
 
@@ -26,6 +26,5 @@ public class MovieInstructor {
         this.id = id;
     }
 
-    public Instructor getInstructor() {
-        return instructor;
-
+    public Instructor getInstructor() { return instructor;}
+}

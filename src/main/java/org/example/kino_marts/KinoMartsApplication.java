@@ -21,3 +21,6 @@ public class KinoMartsApplication {
 public class KinoMartsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KinoMartsApplication.class, args);
+
+	}
+}
