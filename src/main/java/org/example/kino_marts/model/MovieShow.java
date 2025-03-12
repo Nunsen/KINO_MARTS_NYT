@@ -16,7 +16,6 @@ public class MovieShow {
 
     @OneToOne
     @JoinColumn(name = "movie_id", nullable = false) // Fremmednøgle fra Movie
-    @JsonManagedReference
     private Movie movie;
 
 
