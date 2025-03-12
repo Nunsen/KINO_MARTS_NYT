@@ -1,5 +1,7 @@
 package org.example.kino_marts.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -16,12 +18,21 @@ public class MovieShow {
 
     @OneToOne
     @JoinColumn(name = "movie_id", nullable = false) // Fremmednøgle fra Movie
+    @JsonManagedReference // Ejer relationen (forælder) vi sikrer at vi kan serialisere til JSON
     private Movie movie;
 
 
     private LocalDateTime start_time;
     private LocalDateTime end_time;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date_of_movie;
+
+    @OneToOne(mappedBy = "movieShow")
+    @JsonBackReference
+    private CinemaRoom cinemaRoom;
+
+
 
     public int getMovie_show_id() {
         return movie_show_id;

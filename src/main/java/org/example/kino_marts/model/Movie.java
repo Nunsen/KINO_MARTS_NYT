@@ -25,6 +25,11 @@ public class Movie {
     @JoinColumn(name = "instructor_id", nullable = false) // Fremmednøgle fra Instructor
     @JsonBackReference
     private Instructor instructor;
+
+    @OneToOne(mappedBy = "movie")
+    @JsonBackReference // Barnet i relationen, ekskluderes fra JSON-output, vi fortæller hvilken entitet vi vil have "oversat"
+    private MovieShow movieShow;
+
     private String movie_photo;
     private String resume;
 

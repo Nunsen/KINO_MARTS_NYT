@@ -1,5 +1,6 @@
 package org.example.kino_marts.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,9 +18,13 @@ public class Seat {
 
     @ManyToOne //en booking kan have mange sæder
     @JoinColumn(name = "booking_id", nullable = false) // Fremmednøgle fra Booking
+    @JsonBackReference
     private Booking booking;
 
     private int price_of_seat;
+
+
+
 
     public int getSeat_id() {
         return seat_id;

@@ -1,8 +1,11 @@
 package org.example.kino_marts.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -14,11 +17,16 @@ public class Actor {
 
     private String actor_first_name;
     private String actor_last_name;
-    private Date birth_date_actor;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate birth_date_actor;
 
     // En skuespiller kan have mange filmrelationer via MovieActor
     @OneToMany(mappedBy = "actor", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<MovieActor> movies;
+
+
 
     // Getters & Setters
     public int getActor_id() {
@@ -45,11 +53,11 @@ public class Actor {
         this.actor_last_name = actor_last_name;
     }
 
-    public Date getBirth_date_actor() {
+    public LocalDate getBirth_date_actor() {
         return birth_date_actor;
     }
 
-    public void setBirth_date_actor(Date birth_date_actor) {
+    public void setBirth_date_actor(LocalDate birth_date_actor) {
         this.birth_date_actor = birth_date_actor;
     }
 

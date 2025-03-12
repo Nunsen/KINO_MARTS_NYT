@@ -36,7 +36,7 @@ public class DummyData {
             Instructor nolan = new Instructor();
             nolan.setInstructor_first_name("Christopher");
             nolan.setInstructor_last_name("Nolan");
-            nolan.setBirth_date_instructor(Date.valueOf("1970-07-30"));
+            nolan.setBirth_date_instructor(LocalDate.parse("1970-07-30"));
 
             instructorRepo.save(nolan);
 
@@ -44,12 +44,12 @@ public class DummyData {
             Actor actor1 = new Actor();
             actor1.setActor_first_name("Leonardo");
             actor1.setActor_last_name("DiCaprio");
-            actor1.setBirth_date_actor(Date.valueOf("1974-11-11"));
+            actor1.setBirth_date_actor(LocalDate.parse("1974-11-11"));
 
             Actor actor2 = new Actor();
             actor2.setActor_first_name("Matthew");
             actor2.setActor_last_name("McConaughey");
-            actor2.setBirth_date_actor(Date.valueOf("1969-11-04"));
+            actor2.setBirth_date_actor(LocalDate.parse("1969-11-04"));
 
             actorRepo.save(actor1);
             actorRepo.save(actor2);
@@ -62,7 +62,7 @@ public class DummyData {
             inception.setRelease_year(2010);
             inception.setActor(actor1);
             inception.setInstructor(nolan);
-            inception.setMovie_photo("https://image.url/inception.jpg");
+            inception.setMovie_photo("https://scale.coolshop-cdn.com/product-media.coolshop-cdn.com/AB397S/ea81c4f8324449c0b8ef0c225c51b634.JPEG/f/inception-dvd.JPEG");
             inception.setResume("A thief who enters dreams...");
 
             Movie interstellar = new Movie();
@@ -72,7 +72,7 @@ public class DummyData {
             interstellar.setRelease_year(2014);
             interstellar.setActor(actor2);
             interstellar.setInstructor(nolan);
-            interstellar.setMovie_photo("https://image.url/interstellar.jpg");
+            interstellar.setMovie_photo("https://detforboern.dk/wp-content/uploads/gurli-gris-bifald.jpg");
             interstellar.setResume("A space exploration story...");
 
             movieRepo.save(inception);
@@ -126,13 +126,13 @@ public class DummyData {
             // Opret bookinger
             Booking booking1 = new Booking();
             booking1.setCustomer(customer1);
-            booking1.setDate_of_movie(Date.valueOf(LocalDate.now()));
+            booking1.setDate_of_movie(LocalDate.now());
             booking1.setMovieShow(show1);
             booking1.setStatus_payment("Paid");
 
             Booking booking2 = new Booking();
             booking2.setCustomer(customer2);
-            booking2.setDate_of_movie(Date.valueOf(LocalDate.now().plusDays(1)));
+            booking2.setDate_of_movie(LocalDate.now().plusDays(1));
             booking2.setMovieShow(show2);
             booking2.setStatus_payment("Not Paid");
 

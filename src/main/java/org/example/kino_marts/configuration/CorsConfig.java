@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         @Override
         public void addCorsMappings (CorsRegistry registry){
             registry.addMapping("/api/**")
-                    .allowedOrigins("*")
+                    .allowedOrigins("http://localhost:63344")
                     .allowedMethods("GET", "POST", "PUT", "DELETE")
                     .allowedHeaders("*");
         }

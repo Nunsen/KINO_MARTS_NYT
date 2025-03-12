@@ -14,8 +14,16 @@ public class CinemaRoom {
     @JoinColumn(name = "movie_show_id", nullable = false) // Fremmednøgle fra movie_show
     @JsonManagedReference
     private MovieShow movieShow;
+
     private String room_name;
     private int amount_of_seats;
+
+
+
+
+
+
+
 
     public int getRoom_id() {
         return this.room_id;

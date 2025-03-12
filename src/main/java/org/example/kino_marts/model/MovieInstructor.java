@@ -1,5 +1,6 @@
 package org.example.kino_marts.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +12,7 @@ public class MovieInstructor {
 
     @ManyToOne
     @JoinColumn(name = "instructor_id", nullable = false)
+    @JsonBackReference
     private Instructor instructor; // Fremmednøgle fra Instructor
 
     @ManyToOne
