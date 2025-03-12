@@ -1,5 +1,6 @@
 package org.example.kino_marts.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,10 +18,12 @@ public class Movie {
 
     @ManyToOne
     @JoinColumn(name = "actor_id", nullable = false) // Fremmednøgle fra Actor
+    @JsonBackReference
     private Actor actor;
 
     @ManyToOne
     @JoinColumn(name = "instructor_id", nullable = false) // Fremmednøgle fra Instructor
+    @JsonBackReference
     private Instructor instructor;
     private String movie_photo;
     private String resume;

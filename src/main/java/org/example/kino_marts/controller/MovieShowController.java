@@ -8,6 +8,8 @@ import org.example.kino_marts.repository.MovieShowRepo;
 import java.util.List;
 
 //RestController returnerer JSON (tekst), vi adskiller backend og frontend
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/movieshows")
 public class MovieShowController {

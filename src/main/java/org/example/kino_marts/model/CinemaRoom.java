@@ -1,5 +1,6 @@
 package org.example.kino_marts.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,12 +12,13 @@ public class CinemaRoom {
 
     @OneToOne
     @JoinColumn(name = "movie_show_id", nullable = false) // Fremmednøgle fra movie_show
+    @JsonManagedReference
     private MovieShow movieShow;
     private String room_name;
     private int amount_of_seats;
 
     public int getRoom_id() {
-        return room_id;
+        return this.room_id;
     }
 
     public void setRoom_id(int room_id) {

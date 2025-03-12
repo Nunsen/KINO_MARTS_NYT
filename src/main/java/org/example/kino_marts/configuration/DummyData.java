@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,17 +108,17 @@ public class DummyData {
 
             // Opret filmvisninger
             MovieShow show1 = new MovieShow();
-            show1.setMovie_id(inception);
-            show1.setStart_time(Date.valueOf(LocalDate.now()));
-            show1.setEnd_time(Date.valueOf(LocalDate.now()));
-            show1.setDate_of_movie(Date.valueOf(LocalDate.now()));
+            show1.setMovie(inception);
+            show1.setStart_time(LocalDateTime.now());
+            show1.setEnd_time(LocalDateTime.now());
+            show1.setDate_of_movie(LocalDate.now());
 
 
             MovieShow show2 = new MovieShow();
-            show2.setMovie_id(interstellar);
-            show2.setStart_time(Date.valueOf(LocalDate.now().plusDays(1)));
-            show2.setEnd_time(Date.valueOf(LocalDate.now().plusDays(1)));
-            show2.setDate_of_movie(Date.valueOf(LocalDate.now().plusDays(1)));
+            show2.setMovie(interstellar);
+            show2.setStart_time(LocalDateTime.now().plusDays(1));
+            show2.setEnd_time(LocalDateTime.now().plusDays(1));
+            show2.setDate_of_movie(LocalDate.now().plusDays(1));
 
             movieShowRepo.save(show1);
             movieShowRepo.save(show2);

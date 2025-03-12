@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class MovieShow {
@@ -14,12 +16,13 @@ public class MovieShow {
 
     @OneToOne
     @JoinColumn(name = "movie_id", nullable = false) // Fremmednøgle fra Movie
-    private Movie movie_id;
+    @JsonManagedReference
+    private Movie movie;
 
 
-    private Date start_time;
-    private Date end_time;
-    private Date date_of_movie;
+    private LocalDateTime start_time;
+    private LocalDateTime end_time;
+    private LocalDate date_of_movie;
 
     public int getMovie_show_id() {
         return movie_show_id;
@@ -29,35 +32,36 @@ public class MovieShow {
         this.movie_show_id = movie_show_id;
     }
 
-    public Movie getMovie_id() {
-        return movie_id;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovie_id(Movie movie_id) {
-        this.movie_id = movie_id;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    public Date getStart_time() {
+
+    public LocalDateTime getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Date start_time) {
+    public void setStart_time(LocalDateTime start_time) {
         this.start_time = start_time;
     }
 
-    public Date getEnd_time() {
+    public LocalDateTime getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Date end_time) {
+    public void setEnd_time(LocalDateTime end_time) {
         this.end_time = end_time;
     }
 
-    public Date getDate_of_movie() {
+    public LocalDate getDate_of_movie() {
         return date_of_movie;
     }
 
-    public void setDate_of_movie(Date date_of_movie) {
+    public void setDate_of_movie(LocalDate date_of_movie) {
         this.date_of_movie = date_of_movie;}
     }
 
