@@ -27,6 +27,10 @@ public class MovieShow {
     private LocalDateTime start_time;
     private LocalDateTime end_time;
 
+    @OneToMany(mappedBy = "movieShow", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<MovieShowTime> showTimes;  // Nu kan vi have flere visningstider!
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date_of_movie;
 

@@ -1,14 +1,13 @@
 package org.example.kino_marts.configuration;
+
 import org.example.kino_marts.model.*;
 import org.example.kino_marts.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -17,6 +16,7 @@ public class DummyData {
     CommandLineRunner initDatabase(
             MovieRepo movieRepo,
             MovieShowRepo movieShowRepo,
+            MovieShowTimeRepo movieShowTimeRepo, // Nyt repository til MovieShowTime
             BookingRepo bookingRepo,
             ActorRepo actorRepo,
             MovieActorRepo movieActorRepo,
@@ -26,8 +26,8 @@ public class DummyData {
             SeatRepo seatRepo
     ) {
         return args -> {
-            System.out.println("📀 DummyData bliver kaldt!"); // 👈 Log i terminalen
-            // Hvis der allerede findes data, så stop
+            System.out.println("📀 DummyData bliver kaldt!");
+
             if (movieRepo.count() > 0) return;
 
             System.out.println("📀 Indsætter dummy data...");
@@ -37,7 +37,6 @@ public class DummyData {
             nolan.setInstructor_first_name("Christopher");
             nolan.setInstructor_last_name("Nolan");
             nolan.setBirth_date_instructor(LocalDate.parse("1970-07-30"));
-
             instructorRepo.save(nolan);
 
             // Opret skuespillere
@@ -78,111 +77,42 @@ public class DummyData {
             movieRepo.save(inception);
             movieRepo.save(interstellar);
 
-            // Opret relationer mellem film og skuespillere
-            MovieActor movieActor1 = new MovieActor();
-            movieActor1.setMovie(inception);
-            movieActor1.setActor(actor1);
+            // Opret filmfremvisninger
+            MovieShow inceptionShow = new MovieShow();
+            inceptionShow.setMovie(inception);
+            inceptionShow.setDate_of_movie(LocalDate.of(2024, 6, 10));
 
-            MovieActor movieActor2 = new MovieActor();
-            movieActor2.setMovie(interstellar);
-            movieActor2.setActor(actor2);
+            MovieShow interstellarShow = new MovieShow();
+            interstellarShow.setMovie(interstellar);
+            interstellarShow.setDate_of_movie(LocalDate.of(2024, 6, 12));
 
-            movieActorRepo.save(movieActor1);
-            movieActorRepo.save(movieActor2);
+            movieShowRepo.save(inceptionShow);
+            movieShowRepo.save(interstellarShow);
 
+            // Opret visningstider til Inception
+            MovieShowTime inceptionTime1 = new MovieShowTime();
+            inceptionTime1.setMovieShow(inceptionShow);
+            inceptionTime1.setStart_time(LocalDateTime.of(2024, 6, 10, 14, 0));
+            inceptionTime1.setEnd_time(LocalDateTime.of(2024, 6, 10, 17, 0));
 
+            MovieShowTime inceptionTime2 = new MovieShowTime();
+            inceptionTime2.setMovieShow(inceptionShow);
+            inceptionTime2.setStart_time(LocalDateTime.of(2024, 6, 10, 18, 0));
+            inceptionTime2.setEnd_time(LocalDateTime.of(2024, 6, 10, 21, 0));
 
-            // Opret kunder
-            Customer customer1 = new Customer();
-            customer1.setCustomer_first_name("John");
-            customer1.setCustomer_last_name("Doe");
-            customer1.setPhone_number("12345678");
+            // Opret visningstider til Interstellar
+            MovieShowTime interstellarTime1 = new MovieShowTime();
+            interstellarTime1.setMovieShow(interstellarShow);
+            interstellarTime1.setStart_time(LocalDateTime.of(2024, 6, 12, 15, 0));
+            interstellarTime1.setEnd_time(LocalDateTime.of(2024, 6, 12, 18, 0));
 
-            Customer customer2 = new Customer();
-            customer2.setCustomer_first_name("Jane");
-            customer2.setCustomer_last_name("Smith");
-            customer2.setPhone_number("87654321");
+            MovieShowTime interstellarTime2 = new MovieShowTime();
+            interstellarTime2.setMovieShow(interstellarShow);
+            interstellarTime2.setStart_time(LocalDateTime.of(2024, 6, 12, 20, 0));
+            interstellarTime2.setEnd_time(LocalDateTime.of(2024, 6, 12, 23, 0));
 
-            customerRepo.save(customer1);
-            customerRepo.save(customer2);
-
-            // Opret filmvisninger
-            MovieShow show1 = new MovieShow();
-            show1.setMovie(inception);
-            show1.setDate_of_movie(LocalDate.of(2024, 6, 10));
-            show1.setStart_time(LocalDateTime.of(2024, 6, 10, 14, 0));
-            show1.setEnd_time(LocalDateTime.of(2024, 6, 10, 18, 0));
-            movieShowRepo.save(show1);
-
-            MovieShow show2 = new MovieShow();
-            show2.setMovie(interstellar);
-            show2.setDate_of_movie(LocalDate.of(2024, 6, 12));
-            show2.setStart_time(LocalDateTime.of(2024, 6, 10, 14, 0));
-            show2.setEnd_time(LocalDateTime.of(2024, 6, 10, 18, 0));
-            movieShowRepo.save(show2);
-
-            MovieShow show3 = new MovieShow();
-            show3.setMovie(interstellar);
-            show3.setDate_of_movie(LocalDate.of(2024, 6, 12));
-            show3.setStart_time(LocalDateTime.of(2024, 6, 10, 17, 0));
-            show3.setEnd_time(LocalDateTime.of(2024, 6, 10, 20, 0));
-            movieShowRepo.save(show3);
-
-
-            // Opret bookinger
-            Booking booking1 = new Booking();
-            booking1.setCustomer(customer1);
-            booking1.setDate_of_movie(LocalDate.now());
-            booking1.setMovieShow(show1);
-            booking1.setStatus_payment("Paid");
-
-            Booking booking2 = new Booking();
-            booking2.setCustomer(customer2);
-            booking2.setDate_of_movie(LocalDate.now().plusDays(1));
-            booking2.setMovieShow(show2);
-            booking2.setStatus_payment("Not Paid");
-
-            bookingRepo.save(booking1);
-            bookingRepo.save(booking2);
-
-            // Opret biografsale
-            CinemaRoom room1 = new CinemaRoom();
-            room1.setRoom_name("Sal 1");
-            room1.setAmount_of_seats(50);
-            room1.setMovieShow(show1);
-
-            CinemaRoom room2 = new CinemaRoom();
-            room2.setRoom_name("Sal 2");
-            room2.setAmount_of_seats(40);
-            room2.setMovieShow(show2);
-
-            cinemaRoomRepo.save(room1);
-            cinemaRoomRepo.save(room2);
-
-
-            // Opret sæder
-            List<Seat> seats = new ArrayList<>();
-            for (int i = 1; i <= 10; i++) {
-                Seat seat = new Seat();
-                seat.setSeat_name("Seat " + i);
-                seat.setOccupied(false);
-                seat.setRoom_id(room1);
-                seat.setBooking_id(booking1);
-                seat.setPrice_of_seat(100);
-                seats.add(seat);
-            }
-
-            for (int i = 11; i <= 20; i++) {
-                Seat seat = new Seat();
-                seat.setSeat_name("Seat " + i);
-                seat.setOccupied(false);
-                seat.setRoom_id(room2);
-                seat.setBooking_id(booking2);
-                seat.setPrice_of_seat(120);
-                seats.add(seat);
-            }
-
-            seatRepo.saveAll(seats);
+            // Gem visningstider
+            movieShowTimeRepo.saveAll(List.of(inceptionTime1, inceptionTime2, interstellarTime1, interstellarTime2));
 
             System.out.println("✅ Dummy data indsat i databasen!");
         };
