@@ -72,7 +72,7 @@ public class DummyData {
             interstellar.setRelease_year(2014);
             interstellar.setActor(actor2);
             interstellar.setInstructor(nolan);
-            interstellar.setMovie_photo("https://detforboern.dk/wp-content/uploads/gurli-gris-bifald.jpg");
+            interstellar.setMovie_photo("https://imusic.b-cdn.net/images/item/original/935/5051892182935.jpg?interstellar-2015-interstellar-dvd&class=scaled&v=1691753575");
             interstellar.setResume("A space exploration story...");
 
             movieRepo.save(inception);
@@ -109,19 +109,25 @@ public class DummyData {
             // Opret filmvisninger
             MovieShow show1 = new MovieShow();
             show1.setMovie(inception);
-            show1.setStart_time(LocalDateTime.now());
-            show1.setEnd_time(LocalDateTime.now());
-            show1.setDate_of_movie(LocalDate.now());
-
+            show1.setDate_of_movie(LocalDate.of(2024, 6, 10));
+            show1.setStart_time(LocalDateTime.of(2024, 6, 10, 14, 0));
+            show1.setEnd_time(LocalDateTime.of(2024, 6, 10, 18, 0));
+            movieShowRepo.save(show1);
 
             MovieShow show2 = new MovieShow();
             show2.setMovie(interstellar);
-            show2.setStart_time(LocalDateTime.now().plusDays(1));
-            show2.setEnd_time(LocalDateTime.now().plusDays(1));
-            show2.setDate_of_movie(LocalDate.now().plusDays(1));
-
-            movieShowRepo.save(show1);
+            show2.setDate_of_movie(LocalDate.of(2024, 6, 12));
+            show2.setStart_time(LocalDateTime.of(2024, 6, 10, 14, 0));
+            show2.setEnd_time(LocalDateTime.of(2024, 6, 10, 18, 0));
             movieShowRepo.save(show2);
+
+            MovieShow show3 = new MovieShow();
+            show3.setMovie(interstellar);
+            show3.setDate_of_movie(LocalDate.of(2024, 6, 12));
+            show3.setStart_time(LocalDateTime.of(2024, 6, 10, 17, 0));
+            show3.setEnd_time(LocalDateTime.of(2024, 6, 10, 20, 0));
+            movieShowRepo.save(show3);
+
 
             // Opret bookinger
             Booking booking1 = new Booking();

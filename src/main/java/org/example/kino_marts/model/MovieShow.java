@@ -3,11 +3,14 @@ package org.example.kino_marts.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class MovieShow {
@@ -16,11 +19,10 @@ public class MovieShow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movie_show_id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false) // Fremmednøgle fra Movie
     @JsonManagedReference // Ejer relationen (forælder) vi sikrer at vi kan serialisere til JSON
     private Movie movie;
-
 
     private LocalDateTime start_time;
     private LocalDateTime end_time;
@@ -32,13 +34,15 @@ public class MovieShow {
     @JsonBackReference
     private CinemaRoom cinemaRoom;
 
-
+   public void setShow_times(List<LocalDateTime> show_times) {
+        this.show_times = show_times;
+    }
 
     public int getMovie_show_id() {
         return movie_show_id;
     }
 
-    public void setMovie_show_id(int movie_show_id) {
+    public void setMovie_show_id ( int movie_show_id){
         this.movie_show_id = movie_show_id;
     }
 
@@ -46,7 +50,7 @@ public class MovieShow {
         return movie;
     }
 
-    public void setMovie(Movie movie) {
+    public void setMovie(Movie movie){
         this.movie = movie;
     }
 
@@ -55,7 +59,7 @@ public class MovieShow {
         return start_time;
     }
 
-    public void setStart_time(LocalDateTime start_time) {
+    public void setStart_time(LocalDateTime start_time){
         this.start_time = start_time;
     }
 
@@ -63,7 +67,7 @@ public class MovieShow {
         return end_time;
     }
 
-    public void setEnd_time(LocalDateTime end_time) {
+    public void setEnd_time(LocalDateTime end_time){
         this.end_time = end_time;
     }
 
@@ -71,8 +75,8 @@ public class MovieShow {
         return date_of_movie;
     }
 
-    public void setDate_of_movie(LocalDate date_of_movie) {
-        this.date_of_movie = date_of_movie;}
+    public void setDate_of_movie (LocalDate date_of_movie){
+        this.date_of_movie = date_of_movie;
     }
-
+}
 

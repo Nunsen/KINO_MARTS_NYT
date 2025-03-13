@@ -23,6 +23,8 @@ public class MovieShowController {
         List<MovieShow> movieShows = movieShowRepo.findAll();
         List<Map<String, Object>> response = new ArrayList<>();
 
+
+
         // Konverter hver filmvisning til et simpelt JSON-venligt format
         for (MovieShow show : movieShows) {
             Map<String, Object> showData = new HashMap<>();
