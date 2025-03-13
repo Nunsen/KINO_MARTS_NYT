@@ -1,8 +1,9 @@
 package org.example.kino_marts.controller;
 
 import org.example.kino_marts.model.MovieShow;
-import org.springframework.web.bind.annotation.*;
+import org.example.kino_marts.model.MovieShowTime;
 import org.example.kino_marts.repository.MovieShowRepo;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -10,35 +11,38 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/movieshows") // Alle endpoints starter med /api/movieshows
 public class MovieShowController {
-    private final MovieShowRepo movieShowRepo; // Database-repository til at hente og gemme filmvisninger
+    private final MovieShowRepo movieShowRepo;
 
-    // Dependency Injection: MovieShowRepo bliver automatisk sat af Spring Boot
     public MovieShowController(MovieShowRepo movieShowRepo) {
         this.movieShowRepo = movieShowRepo;
     }
 
-    // Hent alle filmvisninger med movie_photo inkluderet
+    // Hent alle filmvisninger med MovieShowTime inkluderet
     @GetMapping
     public List<Map<String, Object>> getAllMovieShows() {
         List<MovieShow> movieShows = movieShowRepo.findAll();
         List<Map<String, Object>> response = new ArrayList<>();
 
-
-
-        // Konverter hver filmvisning til et simpelt JSON-venligt format
         for (MovieShow show : movieShows) {
             Map<String, Object> showData = new HashMap<>();
-            showData.put("id", show.getMovie_show_id());
-            showData.put("title", show.getMovie().getTitle());
-            showData.put("movie_photo", show.getMovie().getMovie_photo()); // 🔹 Sender billedets URL
-            showData.put("date", show.getDate_of_movie().toString());
-            showData.put("start_time", show.getStart_time().toString());
-            showData.put("end_time", show.getEnd_time().toString());
+            showData.put("movie", show.getMovie());
+            showData.put("date_of_movie", show.getDate_of_movie());
 
-            response.add(showData); // Tilføjer filmvisningen til listen over resultater
+            // Hent visningstider for dette MovieShow
+            List<Map<String, Object>> showTimesList = new ArrayList<>();
+            for (MovieShowTime time : show.getMovieShowTimes()) {
+                Map<String, Object> timeData = new HashMap<>();
+                timeData.put("start_time", time.getStart_time());
+                timeData.put("end_time", time.getEnd_time());
+                timeData.put("show_time_id", time.getShow_time_id());
+                showTimesList.add(timeData);
+            }
+
+            showData.put("showTimes", showTimesList);
+            response.add(showData);
         }
 
-        return response;// Returnerer JSON-liste med filmvisninger
+        return response;
     }
 
     // Hent en specifik filmvisning via ID
@@ -48,12 +52,19 @@ public class MovieShowController {
         if (movieShowOptional.isPresent()) {
             MovieShow show = movieShowOptional.get();
             Map<String, Object> showData = new HashMap<>();
-            showData.put("id", show.getMovie_show_id());
-            showData.put("title", show.getMovie().getTitle());
-            showData.put("movie_photo", show.getMovie().getMovie_photo()); // 🔹 Sender billedets URL
-            showData.put("date", show.getDate_of_movie().toString());
-            showData.put("start_time", show.getStart_time().toString());
-            showData.put("end_time", show.getEnd_time().toString());
+            showData.put("movie", show.getMovie());
+            showData.put("date_of_movie", show.getDate_of_movie());
+
+            List<Map<String, Object>> showTimesList = new ArrayList<>();
+            for (MovieShowTime time : show.getMovieShowTimes()) {
+                Map<String, Object> timeData = new HashMap<>();
+                timeData.put("start_time", time.getStart_time());
+                timeData.put("end_time", time.getEnd_time());
+                timeData.put("show_time_id", time.getShow_time_id());
+                showTimesList.add(timeData);
+            }
+
+            showData.put("showTimes", showTimesList);
             return showData;
         }
         return null;

@@ -1,7 +1,10 @@
 package org.example.kino_marts.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Movie {
@@ -26,9 +29,11 @@ public class Movie {
     @JsonBackReference
     private Instructor instructor;
 
-    @OneToOne(mappedBy = "movie")
-    @JsonBackReference // Barnet i relationen, ekskluderes fra JSON-output, vi fortæller hvilken entitet vi vil have "oversat"
-    private MovieShow movieShow;
+
+    // Rettet til en liste, da en film kan have flere visninger
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<MovieShow> movieShows;
 
     private String movie_photo;
     private String resume;
