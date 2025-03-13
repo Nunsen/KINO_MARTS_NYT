@@ -34,9 +34,6 @@ public class MovieShow {
     @JsonBackReference
     private CinemaRoom cinemaRoom;
 
-   public void setShow_times(List<LocalDateTime> show_times) {
-        this.show_times = show_times;
-    }
 
     public int getMovie_show_id() {
         return movie_show_id;
