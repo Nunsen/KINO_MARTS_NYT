@@ -18,7 +18,7 @@ class KinoMartsApplicationTests {
 		MovieShow movieShow = new MovieShow();
 		final Movie movie = new Movie();
 		movie.setAge_requirement(20);
-		movieShow.setMovie_id(movie);
+		movieShow.setMovie(movie);
 		movieShowRepo.save(movieShow);
 		assertEquals(1,1);
 	}
