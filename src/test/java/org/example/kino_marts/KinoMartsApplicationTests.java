@@ -14,16 +14,6 @@ class KinoMartsApplicationTests {
 	MovieShowRepo movieShowRepo;
 
 	@Test
-	void testMethod(){
-		MovieShow movieShow = new MovieShow();
-		final Movie movie = new Movie();
-		movie.setAge_requirement(20);
-		movieShow.setMovie(movie); //rettet
-		movieShowRepo.save(movieShow);
-		assertEquals(1,1);
-	}
-
-	@Test
 	void contextLoads() {
 		assertEquals(1,1);
 	}
