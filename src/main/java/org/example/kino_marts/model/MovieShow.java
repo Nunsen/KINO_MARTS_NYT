@@ -18,7 +18,7 @@ public class MovieShow {
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false) // Fremmednøgle fra Movie
-    @JsonBackReference // Ejer relationen (forælder) vi sikrer at vi kan serialisere til JSON
+    @JsonBackReference // barnet, dette ignoreres ved serialisering
     private Movie movie;
 
     private LocalDateTime start_time;

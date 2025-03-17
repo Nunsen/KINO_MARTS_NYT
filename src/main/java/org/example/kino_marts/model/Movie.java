@@ -32,7 +32,7 @@ public class Movie {
 
     // Rettet til en liste, da en film kan have flere visninger
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference // Ejer relationen (forælder) vi sikrer at vi kan serialisere til JSON
     private List<MovieShow> movieShows;
 
     private String movie_photo;
